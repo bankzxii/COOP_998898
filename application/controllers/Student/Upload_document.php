@@ -36,39 +36,49 @@ class Upload_document extends CI_Controller {
 
         $this->form_validation->set_rules('coop_document_id', 'ประเภทเอกสาร', 'trim|required|is_natural_no_zero');
         
+        $data['coop_document'] = $this->Form->gets_form();
+        $data['files'] = $this->Coop_Submitted_Form_Search->test_form_by_code($student_id);
+
+        
         // input form view
         if ($this->form_validation->run() != FALSE)
         {
         
-        // if($this->input->post('coop_document_id')) {
+         // if($this->input->post('coop_document_id')) {
             $config['upload_path']          = './uploads/';
-            $config['allowed_types']        = 'pdf|jpg|jpeg|png';
+            $config['allowed_types']        = 'pdf|jpg|jpeg|png|docx';
             $config['max_size']             = 2048;
             $config['encrypt_name'] = true;
             $this->load->library('upload', $config);
 
             if ( ! $this->upload->do_upload('file-input')) {
                 $data['session_alert'] = '<div class="alert alert-warning">'.$this->upload->display_errors().'</div>';
-            } else {
+             } else {
                 $file = $this->upload->data();    
 
                 $document_form = $this->Form->get_form($this->input->post('coop_document_id'))[0];
+          
+               	if ((String)$document_form['document_active'] == "0") {
+               		echo "<script>alert('เอกสารนี้ยังไม่ได้กำหนดส่ง กรุณาติดต่อเจ้าหน้าที่')</script>";
+            		redirect('Student/Upload_document', 'refresh');
+            		die();
+	               	} else {
+	                //insert to db
+	                $insert['document_pdf_file'] = '/uploads/'.$file['file_name'];
+	                $insert['coop_document_id'] = $document_form['document_id'];
+	                $insert['student_id'] = $student_id;
+	                $insert['document_subject'] = 1;
+	                
+	                @$this->Coop_Submitted_Form_Search->delete_form_by_student_and_code($student_id, $document_form['document_id']);                    
+	                $this->Coop_Submitted_Form_Search->insert_form_by_student_and_code($insert);
 
-                //insert to db
-                $insert['document_pdf_file'] = '/uploads/'.$file['file_name'];
-                $insert['coop_document_id'] = $document_form['document_id'];
-                $insert['student_id'] = $student_id;
-                $insert['document_subject'] = 1;
-                
-                @$this->Coop_Submitted_Form_Search->delete_form_by_student_and_code($student_id, $document_form['document_id']);                    
-                $this->Coop_Submitted_Form_Search->insert_form_by_student_and_code($insert);
-
-                if($document_form['document_name'] == 'IN-S001') {
-                    $this->Student->update_student($student_id, array(
-                        'ins001_file' => $insert['document_pdf_file']
-                    ));
-                }
-                $data['session_alert'] = '<div class="alert alert-success">อัพโหลดเอกสาร <b>'.$document_form['document_code'].' '.$document_form['document_name'].'</b> เรียบร้อย ขอบคุณที่ให้ความร่วมมือค่ะ</div>';
+	                if($document_form['document_name'] == 'IN-S001') {
+	                    $this->Student->update_student($student_id, array(
+	                        'ins001_file' => $insert['document_pdf_file']
+	                    ));
+	                }
+	                $data['session_alert'] = '<div class="alert alert-success">อัพโหลดเอกสาร <b>'.$document_form['document_code'].' '.$document_form['document_name'].'</b> เรียบร้อย ขอบคุณที่ให้ความร่วมมือค่ะ</div>';
+	            }
             }
         }
         

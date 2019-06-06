@@ -79,7 +79,7 @@ class Skill extends CI_Controller {
             }
            
             $this->session->set_flashdata('status', 'success');
-            redirect('Student/Skill/index/?','refresh');
+            redirect('http://prepro.informatics.buu.ac.th:8001/index.php/Student/Job/lists','refresh');
         }
     
         

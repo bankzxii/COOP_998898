@@ -135,14 +135,25 @@ $("input:checkbox").on('click', function() {
         var datastring = "term_id="+$box.val()
         jQuery.post(SITE_URL+"/Officer/Setting/post_current_term", datastring, function(response) {
             if(response.status) {
-                toastr["success"]("ok ja")
+                toastr["success"]("Success")
             } else {
-                toastr["error"]("err ja")
+                toastr["error"]("err")
             }
         }, 'json');
+        update_when_edit_term(datastring);
     }
 
 });
+
+    function update_when_edit_success(datastring)
+    {
+      
+      //console.log(data)
+      var data = { term_id: datastring }
+      jQuery.post(SITE_URL+"/Company/Setting/update_when_edit_term/", data, function() {
+        
+      }, 'json');
+    }
 
 
 

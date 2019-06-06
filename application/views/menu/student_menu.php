@@ -57,6 +57,11 @@
               </li>
             </ul>
           </li>
+
+	<li class="nav-item nav-dropdown">
+          <a class="nav-link" href="https://docs.google.com/document/d/17JCPThIT9Gsus371QmDSgD1TpSdI_T8zzdvDTaQanO4/edit?fbclid=IwAR06iP6oD2gXBQm12LN37pG-WvhFsJA5rU3eey2KnvB2wrt3LuMEdaT7GNw#"><i class="icon-notebook"></i> คู่มือการใช้งาน</a>
+        </li>
+	<!--คู่มือนิสิต -->
         </ul>
       </nav>
       <button class="sidebar-minimizer brand-minimizer" type="button"></button>

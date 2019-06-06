@@ -20,7 +20,7 @@
                         <th class="text-left">รหัสนิสิต</th>
                         <th class="text-left">ชื่อ-นามสกุล</th>
                         <th class="text-left">GPAX</th>
-                        <th class="text-left">สาขาวิชา</th>
+                        <th class="text-left">สาขาวิชา</th>Fik
                         <th class="text-left">สถานะการส่งเอกสาร</th>
                         <th class="text-left"></th>
                       </tr>

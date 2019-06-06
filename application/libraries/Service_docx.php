@@ -34,7 +34,7 @@ class Service_docx {
         curl_close($curl);
 
         if ($err) {
-            // echo "cURL Error #:" . $err;
+            echo "cURL Error #:" . $err;
         } else {
             // echo $response;
             if(@$data_array['image'] && @$data_array['map_image']) {

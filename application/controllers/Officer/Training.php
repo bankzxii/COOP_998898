@@ -32,7 +32,7 @@ class Training extends CI_Controller {
             $data['status']['text'] = 'เพิ่มข้อมูลโครงการการอบรมสำเร็จ';
         } else if($status == 'success_update' ){
             $data['status']['color'] = 'success';
-            $data['status']['text'] = 'แก้ไขข้อมูลแก้อบรมสำเร็จ';
+            $data['status']['text'] = 'แก้ไขข้อมูลการอบรมสำเร็จ';
         }  
         else {
             $data['status'] = '';
@@ -298,74 +298,119 @@ class Training extends CI_Controller {
 
     public function upload_student_list()
     {
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('training_id','IDการอบรม','required|numeric');
-        if($this->form_validation->run() != false){
-            //check coop test id
-            $training_id = $this->input->post('training_id');            
-            $training_data = $this->Training->get_training($training_id)[0];
-            if(!$training_data) {
-                rediretct('/Officer', 'refresh');
-                die();
+        // $this->load->library('form_validation');
+        // $this->form_validation->set_rules('training_id','IDการอบรม','required|numeric');
+        // if($this->form_validation->run() != false){
+        //     //check coop test id
+        //     $training_id = $this->input->post('training_id');            
+        //     $training_data = $this->Training->get_training($training_id)[0];
+        //     if(!$training_data) {
+        //         rediretct('/Officer', 'refresh');
+        //         die();
+        //     }
+        //     $train_type_id = $training_data['train_type_id'];
+        //     $training_data['train_seat'] = (int) $training_data['train_seat'];
+        	$training_id = $this->input->post('training_id');
+        	$training_data = $this->Training->get_training($training_id)[0];
+        	$train_type = $training_data['train_type_id'];
+            $student_id = nl2br($this->input->post('student_id_post'));
+            $ids = explode(PHP_EOL, $student_id);
+            $error = 0; 
+            $count = 0;
+            $error_arr = array();
+            $error_arr2 = "";
+
+            foreach ($ids as $row) {
+            	$data = $this->Training->check_student_in_training($training_id, $row);
+            	$check_login_data = $this->Training->check_student_login($row);
+            	if(!$check_login_data) {
+            		$error++;
+            		array_push($error_arr, $row);
+            	} else if($data) {
+            		$error++;
+            		array_push($error_arr, $row);
+            	} else {
+            		$this->Training->add_student_to_training($training_id, $row, $train_type);
+            		$count++;
+            	}
             }
-            $training_data['train_seat'] = (int) $training_data['train_seat'];
 
-            $config['upload_path']          = './uploads/';
-            $config['allowed_types']        = 'xlsx';
-            $config['max_size']             = 1500;
-            $config['encrypt_name'] = true;
-            $this->load->library('upload', $config);
-
-            if ( ! $this->upload->do_upload('userfile')) {
-                $data['status'] = $this->upload->display_errors();
-                $this->session->set_flashdata('status', 'error_upload');
-                redirect('Officer/Training/Students/'.$training_id, 'refresh');
-                die();
-            } else {
-                
-                $file = $this->upload->data();            
-
-
-                //แปลง Excel
-                require(FCPATH.'/application/libraries/XLSXReader.php');
-                $xlsx = new XLSXReader($file['full_path']);
-                $sheet = $xlsx->getSheetNames()[1];
-                $count = [
-                    'success' => 0,
-                    'error' => 0,
-                ];
-                foreach($xlsx->getSheetData($sheet) as $key => $row) {
-                    if($key == 0) {
-                        continue;
-                    }
-                    echo '.';
-
-                    if($key > $training_data['train_seat']) {
-                        $count['error']++;
-                        continue;
-                    } else {
-                        // $student_id = trim($row[0]);
-                        $student_id = trim($row[1]);
-                        if(is_numeric($student_id)) {
-                            if($this->Training->add_student_to_training($training_id, $student_id)) {
-                                $count['success']++;
-                            } else {
-                                $count['error']++;
-                            }
-                        }
-                    }
-                }
-
-                unlink($file['full_path']);
-                $this->session->set_flashdata('form-alert', 'เพิ่มนิสิตได้ทั้งหมด '.$count['success'].' คน, เพิ่มไม่สำเร็จ '.$count['error'].' คน');
-                redirect('Officer/Training/Students/'.$training_id, 'refresh');
-                die();
+            foreach ($error_arr as $row) {
+            	$error_arr2 = $error_arr2." ".$row;
             }
-        } else {
-            $this->session->set_flashdata('status', 'error_training_id');
+            $this->session->set_flashdata('form-alert', 'เพิ่มนิสิตได้ทั้งหมด '.$count.' คน, เพิ่มไม่สำเร็จ '.$error.' คน<br>
+            	รหัสนิสิตต่อไปนี้ไม่สามารถเพิ่มได้เนื่องจากยังไม่ได้ Log-in เข้าสูระบบ หรือ มีรายชื่อนิสิตนี้อยู่แล้ว<br>
+            	'.$error_arr2);
             redirect('Officer/Training/Students/'.$training_id, 'refresh');
-            die();  
-        }
+            die();
+
+            // print_r($ids);
+            // echo $count."Error:".$error;
+            
+            // if(is_numeric($student_id)) {
+            //                 if($this->Training->add_student_to_training($training_id, $student_id)) {
+            //                     echo "Test successfully";
+            //                 } else {
+            //                     echo "Fail";
+            //                 }
+            //             }
+
+            // $config['upload_path']          = './uploads/';
+            // $config['allowed_types']        = 'xlsx';
+            // $config['max_size']             = 1500;
+            // $config['encrypt_name'] = true;
+            // $this->load->library('upload', $config);
+
+            // if ( ! $this->upload->do_upload('userfile')) {
+            //     $data['status'] = $this->upload->display_errors();
+            //     $this->session->set_flashdata('status', 'error_upload');
+            //     redirect('Officer/Training/Students/'.$training_id, 'refresh');
+            //     die();
+            // } else {
+                
+            //     $file = $this->upload->data();            
+
+
+            //     //แปลง Excel
+            //     require(FCPATH.'/application/libraries/XLSXReader.php');
+            //     $xlsx = new XLSXReader($file['full_path']);
+            //     $sheet = $xlsx->getSheetNames()[1];
+            //     $count = [
+            //         'success' => 0,
+            //         'error' => 0,
+            //     ];
+            //     foreach($xlsx->getSheetData($sheet) as $key => $row) {
+            //         if($key == 0) {
+            //             continue;
+            //         }
+            //         echo '.';
+
+            //         if($key > $training_data['train_seat']) {
+            //             $count['error']++;
+            //             continue;
+            //         } else {
+            //             // $student_id = trim($row[0]);
+            //             $student_id = trim($row[1]);
+            //             if(is_numeric($student_id)) {
+            //                 if($this->Training->add_student_to_training($training_id, $student_id)) {
+            //                     $count['success']++;
+            //                 } else {
+            //                     $count['error']++;
+            //                 }
+            //             }
+            //         }
+            //     }
+
+            //     unlink($file['full_path']);
+            //     $this->session->set_flashdata('form-alert', 'เพิ่มนิสิตได้ทั้งหมด '.$count['success'].' คน, เพิ่มไม่สำเร็จ '.$count['error'].' คน');
+                // redirect('Officer/Training/Students/'.$training_id, 'refresh');
+                // die();
+        //     }
+        // } else {
+        //     $this->session->set_flashdata('status', 'error_training_id');
+        //     redirect('Officer/Training/Students/'.$training_id, 'refresh');
+        //     die();  
+        // }
     }
 
 }

@@ -52,6 +52,9 @@
             <li class="nav-item">
               <?php echo anchor('Officer/Company/', '<i class="fa fa-address-book-o"></i> ข้อมูลสถานประกอบการ', 'class="nav-link"');?>
             </li>
+            <li class="nav-item">
+              <?php echo anchor('Officer/Company/Change_pwd_view', '<i class="fa fa-address-book-o"></i> เปลี่ยนรหัสผ่าน', 'class="nav-link"');?>
+            </li>
           </ul>
         </li>
         <li class="nav-item">
@@ -149,7 +152,11 @@
             <li class="nav-item">
             <?php echo anchor('Officer/Setting/core_subjects_list', '<i class="fa fa-gear"></i> จัดการวิชาแกน', 'class="nav-link"');?>
             </li>
-      </ul>
+          </ul>
+        </li>
+        <li class="nav-item nav-dropdown">
+          <a class="nav-link" href="https://drive.google.com/uc?id=1NpTv2QHjiGA6QZ9kp9bqwEp8Aolk6IXt&authuser=0&export=download"><i class="icon-notebook"></i> คู่มือการใช้งาน</a>
+        </li>
     </nav>
     <button class="sidebar-minimizer brand-minimizer sidebar-minimized" type="button"></button>
   </div>
@@ -190,4 +197,5 @@
     </div>
   </div>
 </div>
-<script src="<?php echo base_url('assets/js/officer_js/term.js?v2');?>"></script>
+<script src="<?php echo base_url('assets/js/officer_js/term.js');?>"></script>
+

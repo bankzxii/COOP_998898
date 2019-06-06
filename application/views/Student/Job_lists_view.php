@@ -61,10 +61,11 @@
             </div>
           </div>
         </div>
-
-          <?php 
+        <?php if(!$pass_training) { ?>
+             <?php echo'<div class="col-lg-12"><div class="alert alert-warning"> ชั่วโมงอบรมของคุณยังไม่ผ่าน การสมัครงานในขณะที่ชั่งโมงไม่ผ่านมีผลต่อการพิจรณาไปสหกิจ </div></div>';}
+          
           if(count($data) < 1) {
-            echo '<div class="col-lg-12"><div class="alert alert-warning">ไม่พบข้อมูล</div></div>';
+            echo '<div class="col-lg-12"><div class="alert alert-warning">บริษัทยังไม่เปิดให้สมัครงาน</div></div>';
           }
           foreach($data as $row) {
           ?>
@@ -76,6 +77,7 @@
                 </div>
                 <div class="card-body">
                   <p>รายละเอียด: <?php echo $row['company_job_position']['job_description'];?></p>
+                  <p>ทักษะที่ควรมี: <?php echo $row['company_job_position']['job_skill'];?></p>
                   <p>ลักษณะบริษัท: <?php echo $row['company']['company_type'];?></p>                            
                   <p>เวลาทำงาน: <?php echo $row['company']['company_start_time'];?>-<?php echo $row['company']['company_end_time'];?></p>
                   <p>พื้นที่: <?php echo $row['address_company']['company_address_province'];?></p>

@@ -30,7 +30,7 @@ class Company extends CI_Controller {
             $data['status']['color'] = 'danger';
             $data['status']['text'] = 'ผิดพลาด โปรดตรวจสอบ';
         } else if($status != '' ) {
-            $data['status']['color'] = 'danger';
+            $data['status']['color'] = 'success';
             $data['status']['text'] = $status;
         } 
         else {
@@ -56,19 +56,45 @@ class Company extends CI_Controller {
 
         $this->template->view('Officer/Address_company_view',$data);
     }
+
     public function delete($id)
     {
             if(@$this->Company->get_company($id)) {
                 //delete
                 $this->Company->delete_company($id);
-                return $this->index('success_delete');
+                return $this->index('ซ่อนสำเร็จ');
                 die();
             } else {
-                return $this->index();
+                return $this->index('ซ่อนไม่สำเร็จ');
                 die();
             }
         
     }
+
+    public function deleteAll()
+    {
+
+        if ($this->Company->deleteAll()) {
+            return $this->index('ซ่อนสำเร็จ');
+            die();
+        }
+        
+    }
+
+    public function undelete($id)
+    {
+            if(@$this->Company->get_company($id)) {
+                //delete
+                $this->Company->undelete_company($id);
+                return $this->index('โชว์สำเร็จ');
+                die();
+            } else {
+                return $this->index('โชว์ไม่สำเร็จ');
+                die();
+            }
+        
+    }
+
     public function post_add()
     {
         //insert
@@ -94,8 +120,17 @@ class Company extends CI_Controller {
         }
     }
 
+    public function Change_pwd_view(){
+        $this->template->view('/Officer/Change_pwd_view');
+    }
 
+    public function Change_pwd()
+    {
+        $this->load->model('Change_pwd_model');
+        $this->Change_pwd_model->Change_pwd();
+        echo "<script>alert('เปลี่ยนรหัสผ่านเรียบร้อยแล้ว')</script>";
+        redirect('http://prepro.informatics.buu.ac.th:8001/index.php/Officer/Company/Change_pwd_view' ,'refresh');
 
+    }
     
-
 }

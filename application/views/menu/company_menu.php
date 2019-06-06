@@ -38,8 +38,12 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item nav-dropdown">
+          <a class="nav-link" href="https://docs.google.com/document/d/10cDSUFsLzFZJ9D5keZvs7sjkAg61K-rIioJO__9paik/edit?fbclid=IwAR34Umc7uhgQT3vGQEJSHOzm5tCk1ux4HmNqAT5JHPXxU8pR7PElNe8979I"><i class="icon-notebook"></i> คู่มือการใช้งาน</a>
+        </li>
 
         </ul>
       </nav>
       <button class="sidebar-minimizer brand-minimizer" type="button"></button>
     </div>
+

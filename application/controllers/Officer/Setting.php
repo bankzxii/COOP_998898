@@ -57,6 +57,20 @@ class Setting extends CI_Controller {
         echo json_encode($return);
     }
 
+    public function update_when_edit_term()
+    {
+    	$term_id = $this->input->post('term_id');
+    	$this->Term->update_tb_company_has_coop_company_questionnaire_item($term_id);
+		        $this->Term->update_tb_company_has_department($term_id);
+		        $this->Term->update_tb_company_job_position($term_id);
+		        $this->Term->update_tb_coop_company_questionnaire_item($term_id);
+		        $this->Term->update_tb_coop_company_questionnaire_subject($term_id);
+		        $this->Term->update_tb_coop_document($term_id);
+		        $this->Term->update_tb_coop_student_questionnaire_item($term_id);
+		        $this->Term->update_tb_coop_student_questionnaire_subject($term_id);
+		        $this->Term->update_tb_student_core_subject($term_id);
+    }
+
     public function post_new_term()
     {
         //add term

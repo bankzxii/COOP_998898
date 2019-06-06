@@ -18,7 +18,7 @@ function changeTerm(term_id)
         //alert
         swal({
             title: "เปลี่ยนปีการศึกษาเรียบร้อย!",
-            text: "ทำ",
+            text: "",
             icon: "success",
           })
           .then((xxx) => {

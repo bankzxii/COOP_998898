@@ -21,7 +21,7 @@ class Main extends CI_Controller {
 	public function index()
 	{
         $data['rowNews'] = $this->News->gets_news();
-		$this->template->view('template/news_view', $data);
+		$this->template->view('Coop_student/main_view', $data);
 		
 	}
 }  

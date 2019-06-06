@@ -30,7 +30,7 @@
 
                         <div class="row">
                             <div class="form-group col-sm-6">
-                                <label>(ภาษาไทย)</label><code>*</code>
+                                <label>(ภาษาไทย)</label>
                                 <input type="text" class="form-control" id="name_th" name="name_th" value="<?php echo $company['name_th']; ?>" required>
                                 <input type="hidden"  id="company_id" name="company_id" value="<?php echo $company['id']; ?>">
                             </div>
@@ -38,19 +38,19 @@
 
                         <div class="row">
                           <div class="form-group col-sm-6">
-                            <label>(ภาษาอังกฤษ)</label><code>*</code>
+                            <label>(ภาษาอังกฤษ)</label>
                                <input type="text" class="form-control" id="name_en" name="name_en" value="<?php echo $company['name_en']; ?>" required>
                           </div>
                         </div>
 
                         <div class="row">
                           <div class="form-group col-sm-3">
-                            <label>ที่อยู่เลขที่</label><code>*</code>
+                            <label>ที่อยู่เลขที่</label>
                                <input type="text" class="form-control" id="number" name="number" value="<?php echo $company_address['number'];?>" required>
                           </div>
 
                           <div class="form-group col-sm-5">
-                            <label>อาคาร</label><code>*</code>
+                            <label>อาคาร</label>
                                <input type="text" class="form-control" id="building" name="building" value="<?php echo $company_address['building'];?>" required>
                           </div>
 
@@ -69,17 +69,17 @@
                           </div>
 
                           <div class="form-group col-sm-3">
-                            <label>แขวง</label><code>*</code>
+                            <label>แขวง</label>
                                <input type="text" class="form-control" id="district" name="district" value="<?php echo $company_address['district'];?>" required>
                           </div>
 
                           <div class="form-group col-sm-3">
-                            <label>เขต/อำเภอ</label><code>*</code>
+                            <label>เขต/อำเภอ</label>
                                <input type="text" class="form-control" id="area" name="area" value="<?php echo $company_address['area'];?>" required>
                           </div>
 
                           <div class="form-group col-sm-3">
-                            <label>จังหวัด</label><code>*</code>
+                            <label>จังหวัด</label>
                                <input type="text" class="form-control" id="province" name="province" value="<?php echo $company_address['province'];?>" required>
                             </div>
 
@@ -88,17 +88,17 @@
                         <div class="row">
 
                           <div class="form-group col-sm-3">
-                            <label>รหัสไปรษณีย์</label><code>*</code>
+                            <label>รหัสไปรษณีย์</label>
                                <input type="text" class="form-control" id="postal_code" name="postal_code" value="<?php echo $company_address['postal_code'];?>" required>
                           </div>
 
                           <div class="form-group col-sm-4">
-                            <label>ประเภทกิจการ/ธุรกิจ/ผลิตภัณฑ์/ลักษณะการดำเนินงาน</label><code>*</code>
+                            <label>ประเภทกิจการ/ธุรกิจ/ผลิตภัณฑ์/ลักษณะการดำเนินงาน</label>
                                <input type="text" class="form-control" id="company_type" name="company_type" value="<?php echo $company['company_type'];?>" required>
                           </div>
 
                           <div class="form-group col-sm-3">
-                            <label>จำนวนพนักงาน</label><code>*</code>
+                            <label>จำนวนพนักงาน</label>
                                <input type="text" class="form-control" id="total_employee" name="total_employee" value="<?php echo $company['total_employee'];?>" required>
                           </div>
 
@@ -121,7 +121,7 @@
 
                         <div class="row">
                             <div class="form-group col-sm-6">
-                                <label>ชื่อ-นามสกุล</label><code>*</code>
+                                <label>ชื่อ-นามสกุล</label>
                                 <input type="text" class="form-control" id="fullname" name="fullname" value="<?php echo $company_person['fullname'];?>" required>
                             </div>
 
@@ -129,12 +129,12 @@
 
                         <div class="row">
                             <div class="form-group col-sm-4">
-                                <label>ตำแหน่ง</label><code>*</code>
+                                <label>ตำแหน่ง</label>
                                 <input type="text" class="form-control" id="position" name="position" value="<?php echo $company_person['position'];?>" required>
                             </div>
 
                             <div class="form-group col-sm-4">
-                                <label>แผนก/ฝ่าย</label><code>*</code>
+                                <label>แผนก/ฝ่าย</label>
                                 <input type="text" class="form-control" id="department" name="department" value="<?php echo $company_person['department'];?>" required>
                             </div>
 
@@ -142,7 +142,7 @@
 
                         <div class="row">
                             <div class="form-group col-sm-4">
-                                <label>โทรศัพท์</label><code>*</code>
+                                <label>โทรศัพท์</label>
                                 <input type="text" class="form-control" id="telephone" name="telephone" value="<?php echo $company_person['telephone'];?>" required>
                             </div>
 
@@ -155,7 +155,7 @@
 
                         <div class="row">
                             <div class="form-group col-sm-6">
-                                <label>Email</label><code>*</code>
+                                <label>Email</label>
                                 <input type="email" class="form-control" id="email" name="email" value="<?php echo $company_person['email'];?>" required>
                             </div>
 
@@ -169,7 +169,7 @@
                                 <input type="radio" id="hide" name="radios">
                                 </label>
                                 <label>
-                                    ติดต่อโดยตรงกับผู้จัดการ / หัวหน้าหน่วยงาน<code>*</code>
+                                    ติดต่อโดยตรงกับผู้จัดการ / หัวหน้าหน่วยงาน
                                 </label>
                             </div>
 
@@ -181,7 +181,7 @@
                                 <input type="radio" id="show" name="radios">
                                 </label>
                                 <label>
-                                ติดต่อกับบุคคลที่ สถานประกอบการ / หน่วยงาน มอบหมายต่อไปนี้<code>*</code>
+                                ติดต่อกับบุคคลที่ สถานประกอบการ / หน่วยงาน มอบหมายต่อไปนี้
                                 </label>
                             </div>
 
@@ -549,7 +549,7 @@ jQuery("#save_step2_btn").click(function(){
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="form-group col-sm-4">
-                                                    <label for="ccmonth">ตำแหน่ง</label><code>*</code>
+                                                    <label for="ccmonth">ตำแหน่ง</label>
                                                     <select class="form-control" id="ccmonth">
                                                         <option>Programer</option>
                                                         <option>Testor</option>
@@ -558,7 +558,7 @@ jQuery("#save_step2_btn").click(function(){
                                                 </div>
 
                                                 <div class="form-group col-sm-3">
-                                                    <label>จำนวน</label><code>*</code>
+                                                    <label>จำนวน</label>
                                                     <input type="number" class="form-control" id="" name="">
                                                 </div>
 
@@ -568,7 +568,7 @@ jQuery("#save_step2_btn").click(function(){
 
                                             <div class="row">
                                                 <div class="form-group col-sm-12">
-                                                    <label class="col-md-8 form-control-label" for="textarea-input">ลักษณะงานที่นิสิตต้องปฏิบัติงาน<code>*</code></label>
+                                                    <label class="col-md-8 form-control-label" for="textarea-input">ลักษณะงานที่นิสิตต้องปฏิบัติงาน</label>
                                                     <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" value=""></textarea>
                                                 </div>
                                             </div>

@@ -106,6 +106,13 @@
                                   <div class="card-body">
 
                                     <dl class="row">
+                                    <dt class="col-sm-4">
+                                    <a class="btn btn-primary document_check_btn " data-studentid="<?php echo $student['student_id'];?>"><i class="fa fa-list-alt"></i> Resume </a>
+                                    </dt>
+                                    <dd></dd>
+                                    </dl>
+
+                                    <dl class="row">
                                     <dt class="col-sm-4">สถานะ</dt>
                                     <dd><?php echo $coop_status_type['coop_status_name']; ?></dd>
                                     </dl>
@@ -202,5 +209,44 @@
                   </div>
                 </div>   
 </main>     
+
+
+<script src="<?php echo base_url('/assets/js/company_js/document_check_by_code.js?'.time());?>"></script>
+<!-- The Modal -->
+<div class="modal fade" id="document_check_student">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">ตรวจสอบเอกสารรายบุคคล</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+         <table class="table table-bordered" id="document_check_table">
+                    <thead>
+                      <tr>
+                      <th width="60%">เอกสาร</th>
+                      <th width="40%">ดาวน์โหลด</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
 
 

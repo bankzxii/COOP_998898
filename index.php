@@ -54,10 +54,11 @@ date_default_timezone_set('Asia/Bangkok');
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
-	if(getenv('CI_ENV')) {
-		define('ENVIRONMENT', getenv('CI_ENV'));
-	}  
+	// define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+	// if(getenv('CI_ENV')) {
+	// 	define('ENVIRONMENT', getenv('CI_ENV'));
+	// }  
+		define('ENVIRONMENT', 'development');
 
 /*
  *---------------------------------------------------------------

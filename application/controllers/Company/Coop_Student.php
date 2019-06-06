@@ -30,7 +30,7 @@ class Coop_Student extends CI_Controller {
 
         $data['data'] = $this->Coop_Student->gets_coop_student_by_company($company_id);
 
-        // print_r($data);
+        
         $this->breadcrumbs->push('รายชื่อนิสิตสหกิจ', '/Company/Coop_Student/coop_student_list');
         $this->template->view('Company/Coop_student_list_view', $data);
     }

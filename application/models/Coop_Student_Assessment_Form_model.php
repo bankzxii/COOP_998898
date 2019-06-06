@@ -116,11 +116,11 @@ class Coop_Student_Assessment_Form_model extends CI_model {
         $rows = $this->get_coop_student_questionnaire_item_by_subject($subject_id);
         foreach($rows as $row) {
             $run_number = $main_number.".".$i;
-
+            
             //update
-            $this->update_item($row['id'], array(
-                'coop_student_questionnaire_item_number' => $run_number
-            ));
+            // $this->update_item($row['id'], array(
+            //     'coop_student_questionnaire_item_number' => $run_number
+            // ));
 
             $i++;
         }

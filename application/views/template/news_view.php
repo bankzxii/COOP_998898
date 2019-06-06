@@ -10,6 +10,10 @@
       <div class="container-fluid">
         <div class="animated fadeIn">
           <div class="row">
+            <div class="col-md-12">
+                    
+                                          
+                    </div>
             <?php foreach($rowNews as $row) { ?>
                 <div class="col-md-6 offset-md-3">
                     <div class="card">

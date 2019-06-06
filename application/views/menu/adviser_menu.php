@@ -57,6 +57,9 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php echo site_url('Adviser/Coop_student/exam_score');?>"><i class="fa fa-list-ol"></i> คะแนนสอบ</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo site_url('Adviser/Coop_map/map_view');?>"><i class="fa fa-list-ol"></i> แผนที่</a>
+          </li>
         </ul>
       </nav>
       <button class="sidebar-minimizer brand-minimizer" type="button"></button>

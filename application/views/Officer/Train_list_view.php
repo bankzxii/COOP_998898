@@ -56,7 +56,7 @@
                               <p style="width:5px;"></p>
                               <form action="<?php echo site_url('Officer/Training/delete'); ?>" method="post">
                                 <input type="hidden" name="train_id" value="<?php echo $row['train']['train_id'] ; ?>">
-                                <button type="submit" class="btn btn-danger btn-submit btn-block"><i class="fa fa-trash-o"></i> ลบ</button>
+                              <!--  <button type="submit" class="btn btn-danger btn-submit btn-block"><i class="fa fa-trash-o"></i> ลบ</button> -->
                               </form>
                             </div> 
                         </td>

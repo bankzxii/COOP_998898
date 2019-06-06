@@ -47,7 +47,7 @@
 
                                     <dl class="row">
                                     <dt class="col-sm-4">จำนวนหน่วยกิจที่เรียนแล้ว</dt>
-                                    <dd><?php echo isEmptyText();?></dd>
+                                    <dd><?php echo isEmptyText($student_profile['sum_credit']);?></dd>
                                     </dl>
 
                                     <dl class="row">

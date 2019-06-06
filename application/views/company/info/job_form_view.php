@@ -54,7 +54,40 @@
 
                             <div class="col-sm-12"></div>
                             <div class="col-sm-12"></div>
+                            
+                            <div class="row">
+                            <?php foreach ($skills as $skill_category) { ?>
+                            <div class="col">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th><?php echo $skill_category['skill_category_name']; ?></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach($skill_category['skills'] as $key => $skill) { ?>
+                                  
+                                        <tr>
+                                            <td>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="chkbx" type="checkbox" id="key_<?php echo $skill['skill_id'];?>" value="<?php echo $skill['skill_name'];?>" name="skill[]">
+                                                    <label class="form-check-label" for="key_<?php echo $skill['skill_id'];?>"><?php echo $skill['skill_name'];?></label>
+                                                </div>
+                                                
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
 
+                                    </tbody>
+                                </table>
+                            </div>
+                            <?php } ?>                            
+                        </div>
+
+                            <div class="form-group col-sm-12">
+                                <label class="col-md-12 form-control-label" for="textarea-input">ทักษะพิเศษ</label><?php echo form_error('job_description'); ?><code>*</code>
+                                <textarea id="textarea-input" name="job_description" rows="9" class="form-control"><?php echo form_value_db('job_skill', $company_job_position_by_id['job_skill']);?></textarea>
+                            </div>
                             <div class="form-group col-sm-12">
                                 <label class="col-md-12 form-control-label" for="textarea-input">ลักษณะงานที่นิสิตต้องปฏิบัติงาน</label><?php echo form_error('job_description'); ?><code>*</code>
                                 <textarea id="textarea-input" name="job_description" rows="9" class="form-control"><?php echo form_value_db('job_description', $company_job_position_by_id['job_description']);?></textarea>

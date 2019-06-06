@@ -14,7 +14,7 @@
                 <i class="fa fa-align-justify"></i> รายชื่อผู้เข้าร่วมอบรมเก็บชั่วโมง<?php echo $training['train_type']['train_type_name'];?> โครงการ <?php echo $training['train_title'];?> <?php echo $training['note'];?>
 
                 <?php if($is_uploadform) { ?>
-                <a class="btn btn-primary float-right" href="#" data-toggle="modal" data-target="#excel_form"><i class="fa fa-hand-pointer-o"></i> อัพโหลดรายชื่อจาก Google Form</a>
+                <a class="btn btn-primary float-right" href="#" data-toggle="modal" data-target="#excel_form"><i class="fa fa-hand-pointer-o"></i> เพิ่มรายชื่อนิสิต</a>
                 <?php } ?>
                 
             </div>
@@ -166,29 +166,22 @@ $(document).ready(function() {
         <input type="hidden" name="training_id" value="<?php echo $training['train_id'];?>">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">แบบฟอร์มอัพโหลดไฟล์จาก Google Form</h4>
+                <h4 class="modal-title">การเพิ่มรายชื่อนิสิต</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>                
             </div>
             <div class="modal-body">
                 <div class="alert alert-warning">
-                การเตรียมไฟล์สำหรับอัพโหลด
+                การเพิ่มรายชื่อนิสิต
                 <ol>
-                <li>ดาวน์โหลดไฟล์จาก Google Sheet มาเปิดบน Microsoft Excel</li>
-                <li>ทำการลบหัวตารางออก (แถวแรก)</li>
-                <li>เซฟ แล้วนำมาอัพโหลด</li>
+                <li>ให้ Copy แถวที่เป็นรหัสนิสิต</li>
+                <li>นำสิ่งที่ Copy ไปวางในช่องว่าง</li>
+                <li>ลบ censor ออก</li>
                 </ol>
-
-                <p>
-                    ลำดับคอลั่ม<br>
-                    คอลั่มที่ 1: วันที่ (timestamp)<br>
-                    คอลั่มที่ 2: รหัสนิสิต<br>
-                    คอลั่มที่ 3 - สิ้นสุด: อะไรก็ได้<br>
-                </p>
                 </div>
                 <div class="form-group">
-                    <label for="userfile">ไฟล์ Excel</label>
-                    <input type="file" id="userfile" name="userfile" class="form-control">
-                    <span class="help-block">รองรับไฟล์ .xlsx</span>
+                    <label for="userfile">กรอกรหัสนิสิต</label>
+                    <!-- <input type="file" id="userfile" name="userfile" class="form-control"> -->
+                    <textarea id="student_id_post" name="student_id_post" class="form-control"></textarea>
                 </div>
             </div>
             <div class="modal-footer">

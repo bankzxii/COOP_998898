@@ -9,6 +9,25 @@ class Form_model extends CI_model {
         $query = $this->db->get();
         return $query->result_array();
     }
+    public function gets_form_for_upload($term_id = 0)
+    {
+        if($term_id != 0) {
+            $this->db->where('term_id', $term_id);
+        } 
+        $this->db->from('tb_coop_document');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    public function gets_form_for_company($term_id = 0)
+    {
+        if($term_id != 0) {
+            $this->db->where('term_id', $term_id);
+        }
+        $this->db->where('document_id', 2 ); 
+        $this->db->from('tb_coop_document');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 
     public function get_form($document_id, $term_id = 0)
     {

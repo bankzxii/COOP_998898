@@ -156,6 +156,8 @@ class Coop_Submitted_Form_Search extends CI_Controller {
                     $row['student']['id_link'] = '<a href="'.site_url('Officer/Students/student_detail/'.$row['student']['student_id']).'">'.$row['student']['student_id'].'</a>';                
                     // $row['form'] = @$this->Coop_Submitted_Form_Search->search_form_by_student_and_code($r['student_id'], $form_code)[0];
                     $row['form'] = @$cache[$row['student']['student_id']];
+                    // $row['student']['coop_status_name'] = $r['coop_status_name'];
+                    // print_r($row['student']);
                     
 
                     $row['form']['status'] = '<span style="color: red;">ยังไม่ส่ง</span>';

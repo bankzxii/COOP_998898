@@ -18,6 +18,15 @@ class Training_model extends CI_model
        
     }
 
+    public function get_training_by_student_id($training_id,$student_id)
+    {
+        $this->db->where('student_id', $student_id);
+        $this->db->where('train_id', $training_id);
+        $this->db->from('tb_student_train_register');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
     public function get_training($training_id)
     {
         $this->db->where('train_id', $training_id);
@@ -43,23 +52,17 @@ class Training_model extends CI_model
     public function delete_training($training_id)
     {
         $this->db->where('train_id', $training_id);
-        return $this->db->delete('tb_train');
+	return $this->db->delete('tb_train');
 
     }
 
-    public function add_student_to_training($training_id, $student_id) 
+    public function add_student_to_training($training_id, $student_id, $train_type_id) 
     {
-        $db_debug = $this->db->db_debug; //save setting
-        $this->db->db_debug = FALSE; //disable debugging for queries
-
         $array['student_id'] = $student_id;
-        $term = $this->Term->get_current_term();
         $array['register_date'] = date('Y-m-d H:i:s'); 
         $array['train_id'] = $training_id;
-        $train = $this->get_training($training_id)[0];
-        $array['train_type_id'] = $train['train_type_id'];
+        $array['train_type_id'] = $train_type_id;
         $status = $this->db->insert('tb_student_train_register',$array); 
-        $this->db->db_debug = $db_debug;
         
         return $status;
     }
@@ -70,6 +73,14 @@ class Training_model extends CI_model
         $this->db->where('train_type_id', $training_type);
         
         $this->db->from('tb_student_train_register');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function check_student_login($student_id)
+    {
+        $this->db->where('student_id' ,$student_id);
+        $this->db->from('tb_student');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -174,6 +185,8 @@ class Training_model extends CI_model
                 $student_count = count($this->Training_Check_Student->get_student_by_train($student_id, $row['train_id']));
 
                 $row['total_hour'] = $train_info['train_hour'];
+
+                $per_hour = 0;
 
                 if($check_count > 0)
                     $per_hour = $train_info['train_hour']/$check_count;

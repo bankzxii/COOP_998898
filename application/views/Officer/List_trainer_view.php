@@ -1,4 +1,4 @@
-<!-- Main content -->
+o<!-- Main content -->
 <main class="main">
 
 <!-- Breadcrumb -->
@@ -47,6 +47,7 @@
                         <input type="hidden"   name="company_person_id" value="<?php echo $row['company_person']['person_id'] ; ?>">
                         <input type="hidden"   name="company_id" value="<?php echo $company['company_id'] ; ?>">
                         <button type="submit" class="btn btn-danger btn-submit"><i class="icon-trash"></i> ลบ</button>
+                        
                         </form>        
                         </td>
                       </tr>
@@ -162,7 +163,11 @@ jQuery( "#save_trainer" ).submit(function( event ) {
                     }
                 });
             } else {
-                swal("ผิดพลาด", result.text, result.color);
+                swal("ผิดพลาด", result.text, result.color).then((value) => {
+                    if(value) {
+                        location.reload();
+                    }
+                });
             }
             jQuery("#save_trainer input[type=text]").val(null);
             
@@ -176,3 +181,4 @@ jQuery( "#save_trainer" ).submit(function( event ) {
 
 
 </script>
+

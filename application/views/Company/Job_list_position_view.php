@@ -12,10 +12,37 @@
         <div class="card">
             <div class="card-header"><i class="fa fa-align-justify"></i>รายชื่อนิสิต</div>
           <div class="card-body">
+              <div align="center">
+              
+              <a style="width:2%"></a>
+                                      <?php echo anchor('Company/Job_list_position/', '<i class="fa fa-list-alt"></i> รายชื่อนิสิตทั้งหมด', 'class="btn  btn-primary"');?>
+               <a style="width:2%"></a>
+                                      <?php echo anchor('Company/Job_list_position/company_status_id1', '<i class="fa fa-list-alt"></i> นิสิตที่สมัคร', 'class="btn  btn-primary"');?>
+              <a style="width:2%"></a>
+                                      <?php echo anchor('Company/Job_list_position/company_status_id2', '<i class="fa fa-list-alt"></i> นิสิตรอเรียกสัมภาษณ์', 'class="btn  btn-primary"');?>
+              <a style="width:2%"></a>
+                                      <?php echo anchor('Company/Job_list_position/company_status_id3', '<i class="fa fa-list-alt"></i> นิสิตรอประกาศผลสัมภาษณ์', 'class="btn  btn-primary"');?>
+             <a style="width:2%"></a>
+                                      <?php echo anchor('Company/Job_list_position/company_status_id4', '<i class="fa fa-list-alt"></i> ผ่านการสัมภาษณ์', 'class="btn  btn-primary"');?>
+
+
+            </div>
+            
 
               <!---->
               
               <!---->
+              <br>
+
+              <div class="col-md-12">
+                    <div class="alert alert-primary">
+                        <b>**นิสิตที่อยู่ในหน้านี้หมายถึงภาพรวมนิสิตทั้งหมดที่มีสถานะต่างๆภายในบริษัท กรุณาเลือกแท็บถัดไปเพื่อเปลี่ยนสถานะ</b>
+                        
+                    </div>
+
+                </div>
+
+
 
               <table class="table table-bordered" id="student_table">
                     <thead>
@@ -27,7 +54,7 @@
                         <th class="text-center">GPAX</th>
                         <th class="text-center">สาขาวิชา</th>
                         <th class="text-center">ตำแหน่งที่สมัคร</th>
-                        <th class="text-center">สถานะสถานประกอบการ</th>
+                       <!--<th class="text-center">สถานะสถานประกอบการ</th>-->
                       </tr>
                     </thead>
                     <tbody>
@@ -35,7 +62,7 @@
                    
               </table>
               <div style="height:40px;"></div>
-                    <!---->
+                    <!--
                         <div class="container-fluid row">
                           <div class="col-sm-12">
                             <label>เปลี่ยนสถานะนิสิต</label>
@@ -50,11 +77,8 @@
                               </select>
                             </div>
                           </div>
-                          <div class="col-sm-4">
-                            <label></label>
-                            <button type="button" class="btn btn-success" id="change_student_status">Success</button>                             
-                          </div>
-                        </div> 
+                          -->
+                                               </div> 
 
                 </div>
               </div>
@@ -91,7 +115,7 @@ $(document).ready(function() {
         },
         'order': [[2, 'asc']],
         "ajax": {
-          "url": "<?php echo site_url('Company/Job_list_position/ajax_list');?>",
+          "url": "<?php echo site_url('Company/Job_list_position/ajax_list')?>",
           "dataSrc": ""
         },
         "columns": [
@@ -102,7 +126,7 @@ $(document).ready(function() {
             { "data": "student.student_gpax" },
             { "data": "department.department_name" },
             { "data": "job_position.job_title" },
-            { "data": "company_status_type.select_box" },
+            //{ "data": "student.company_status_id" },
         ],
 
         'initComplete': function(){
@@ -139,7 +163,9 @@ $(document).ready(function() {
     } ).draw();
 
     $('#change_student_status').click( function () {
-      var company_status_type_val = jQuery(".company_status_type_val option:selected").val()
+      var company_status_now =  Number("<?php echo $this->input->get('company_status_id');?>")
+      var company_status_type_val = company_status_now+1
+      console.log(company_status_type_val)
       var arr = $('#student_table').DataTable().column(0).checkboxes.selected()
 
       change_company_type_ajax(arr, company_status_type_val)
@@ -176,8 +202,8 @@ function change_company_type_ajax(arr, company_status_type)
   }
       
   swal({
-    title: "Are you sure?",
-    text: "Once deleted, you will not be able to recover this imaginary file!",
+    title: "คุณแน่ใจแล้วใช่หรือไม่",
+    text: "การเปลี่ยนสถานะนิสิตนี้ ไม่สามารถย้อนกลับได้",
     icon: "warning",
     buttons: true,
     dangerMode: true,

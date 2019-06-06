@@ -9,6 +9,7 @@ class Coop_Submitted_Form_Search_model extends CI_model {
 
     }
 
+
     public function search_form_by_code($form_code)
     {
         $this->db->where('coop_document_id',$form_code);
@@ -25,6 +26,17 @@ class Coop_Submitted_Form_Search_model extends CI_model {
         $this->db->from('tb_coop_student_has_coop_document');
         $query = $this->db->get();
         return $query->result_array();
+    }
+    public function test_form_by_code($student_id)
+    {
+        $sql = "SELECT tbc.student_id,document_pdf_file,tb_document.document_deadline,tb_document.document_id  from tb_coop_student_has_coop_document as tbc 
+
+        INNER JOIN tb_coop_document as tb_document ON tbc.coop_document_id = tb_document.document_id
+
+        where tbc.student_id = $student_id";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+
     }
 
     public function delete_form_by_student_and_code($student_id, $form_code, $document_subject = NULL)

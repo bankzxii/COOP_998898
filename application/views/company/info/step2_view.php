@@ -229,7 +229,11 @@ jQuery( "#save_trainer" ).submit(function( event ) {
                 
                 swal("สำเร็จ", result.text, result.color);                
             } else {
-                swal("ผิดพลาด", result.text, result.color);
+                swal("ผิดพลาด", result.text, result.color).then((value) => {
+                    if(value) {
+                        location.reload();
+                    }
+                });
             }
             jQuery("#save_trainer input[type=text]").val(null);
             

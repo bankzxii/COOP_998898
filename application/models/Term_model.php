@@ -63,4 +63,76 @@ class Term_model extends CI_model
         return $query->result_array();
     }
   
+    public function update_tb_company_has_coop_company_questionnaire_item($term_id)
+    {
+        $this->db->where('term_id', $term_id);
+        return $this->db->update('tb_company_has_coop_company_questionnaire_item', array(
+            'term_id' => $term_id
+        ));
+    }
+
+    public function update_tb_company_has_department($term_id)
+    {
+        $this->db->where('term_id', $term_id);
+        return $this->db->update('tb_company_has_department', array(
+            'term_id' => $term_id
+        ));
+    }
+
+    public function update_tb_company_job_position($term_id)
+    {
+        $this->db->where('term_id', $term_id);
+        return $this->db->update('tb_company_job_position', array(
+            'term_id' => $term_id
+        ));
+    }
+
+    public function update_tb_coop_company_questionnaire_item($term_id)
+    {
+        $this->db->where('term_id', $term_id);
+        return $this->db->update('tb_coop_company_questionnaire_item', array(
+            'term_id' => $term_id
+        ));
+    }
+
+    public function update_tb_coop_company_questionnaire_subject($term_id)
+    {
+        $this->db->where('term_id', $term_id);
+        return $this->db->update('tb_coop_company_questionnaire_subject', array(
+            'term_id' => $term_id
+        ));
+    }
+
+    public function update_tb_coop_document($term_id)
+    {
+        $this->db->where('term_id', $term_id);
+        return $this->db->update('tb_coop_document', array(
+            'term_id' => $term_id
+        ));
+    }
+
+    public function update_tb_coop_student_questionnaire_item($term_id)
+    {
+        $this->db->where('term_id', $term_id);
+        return $this->db->update('tb_coop_student_questionnaire_item', array(
+            'term_id' => $term_id
+        ));
+    }
+
+    public function update_tb_coop_student_questionnaire_subject($term_id)
+    {
+        $this->db->where('term_id', $term_id);
+        return $this->db->update('tb_coop_student_questionnaire_subject', array(
+            'term_id' => $term_id
+        ));
+    }
+
+    public function update_tb_student_core_subject($term_id)
+    {
+        $this->db->where('term_id', $term_id);
+        return $this->db->update('tb_student_core_subject', array(
+            'term_id' => $term_id
+        ));
+    }
+
 }

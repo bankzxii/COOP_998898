@@ -118,6 +118,15 @@
           <li>57660132 พิเชษฐ์ ซื่อสัตย์ ( 57660132@go.buu.ac.th )</li>
           <li>57660135 ศานติกร อภัย ( 57660135@go.buu.ac.th )</li>
         </ol>
+        <p>
+          รายนามผู้พัฒนารุ่นสอง
+          <br>
+          <ol>
+          <li>58160386 ณัฐฐิญา อนุกูลทอง ( 58160386@go.buu.ac.th )</li>
+          <li>58160427 วริทธ์นันท์ พุ่มสุข ( 58160427@go.buu.ac.th )</li>
+          <li>58660033 ภควัต ม่วงมิตร ( 58660033@go.buu.ac.th )</li>
+          <li>58660124 กชกร ทิพย์วงศ์เมฆ ( 58660124@go.buu.ac.th )</li>
+        </ol>
         <p class="text-center">
           <h1><a href="https://www.youtube.com/watch?v=X2WH8mHJnhM" target="_blank">Good luck, have fun lol ~</a></h1>
         </p>

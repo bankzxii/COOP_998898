@@ -14,7 +14,7 @@
           </div>
           <div class="card-body">
             <?php if (!$company_job_position_has_student) {?>
-              <div class="alert alert-warning">ไม่พบประวัติการสมัครงาน</div>
+              <div class="alert alert-warning">คุณอยู่ในสถานะต้องสมัครงานใหม่เนื่องจาก <a style=" color: red; font-size:16px;">คุณยังไม่เคยสมัครงาน</a> หรือ <a style=" color: red; font-size:16px;">ไม่ผ่านการคัดเลือก</a></div>
             <?php } else {?>
 
               <table class="table table-bordered">

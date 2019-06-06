@@ -1,4 +1,3 @@
-<!-- Main content -->
 <main class="main">
 
 <!-- Breadcrumb -->
@@ -41,6 +40,7 @@
                         <th class="text-left">ชื่อ-นามสกุล</th>
                         <th class="text-left">สถานะการส่งเอกสาร</th>
                         <th class="text-left">เอกสาร</th>
+                        <!-- <th class="text-left">สถานะ</th> -->
                         
                       </tr>
                     </thead>
@@ -87,7 +87,8 @@ $('#form_id').on('change', function (e) {
             { "data": "student.id_link" },
             { "data": "student.student_fullname" },            
             { "data": "form.status" },
-            { "data": "form.document_pdf_file" }
+            { "data": "form.document_pdf_file" },
+            // { "data": "student.coop_status_name" }
             
         ],
         'initComplete': function(){

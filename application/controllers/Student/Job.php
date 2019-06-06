@@ -30,6 +30,8 @@ class Job extends CI_Controller {
         
         
         $student_id = $this->Login_session->check_login()->login_value;
+
+
         
         if(!$this->Skill_Search->search_skill_by_student($student_id)){
             $this->session->set_flashdata('status', 'select_before');
@@ -42,13 +44,31 @@ class Job extends CI_Controller {
 
         $this->form_validation->set_rules('company_id', 'บริษัท', 'required|numeric');
         $this->form_validation->set_rules('job_title_id', 'ตำแหน่งงาน', 'required|numeric');
-
+        
         $data['student'] = $this->Student->get_student($student_id)[0];
         $data['session_alert'] = '';
+        $data['pass_training'] = false;
+        $train_type = $this->Training->get_student_stat_of_training($student_id)['train_type'];
+        $data['train_type'] = array();
+        foreach($train_type as $type) {
+            $tmp['name'] = $type['train_type_name'];
+            $tmp['total_hour'] = $type['train_type_total_hour'];
+            $tmp['check_hour'] = 0;
+            //calc total hour
+            foreach($type['history'] as $history) {
+                $tmp['check_hour'] += $history['check_hour'];
+            }
+
+            if($tmp['check_hour'] >= $tmp['total_hour']) {
+                $data['pass_training'] = true;
+            } else {
+                $data['pass_training'] = false;
+            }
+        }
         if($data['student']['coop_status_id'] > 1) {
             $data['session_alert'] = '<div class="alert alert-warning">คุณทำการสมัครงานสหกิจแล้ว โปรดรอการตอบกลับขั้นตอนต่อไปค่ะ</div>';
         } else {
-            $data['company'] = $this->Company->gets_company();
+            $data['company'] = $this->Company->gets_company_active();
             $data['job'] = $this->Job->gets_job_title();
         
             $data['data'] = array();
@@ -77,7 +97,7 @@ class Job extends CI_Controller {
                 $temp = array();
                 $temp['company_job_position'] = $row;
                 
-                $temp['company'] = @$this->Company->get_company($row['company_id'])[0];
+                $temp['company'] = @$this->Company->get_companys($row['company_id'])[0];
                 $temp['address_company'] = @$this->Address->get_address_by_company($row['company_id'])[0];
 
                 if(
@@ -287,13 +307,13 @@ class Job extends CI_Controller {
                 "Mother_Age" => "      ",
 
 
-                "Mother_Address_Number" => $data['student_profile']['Mother_Address_Number'],
-                "Mother_Address_Moo" => $data['student_profile']['Mother_Address_Moo'],
-                "Mother_Address_Soi" => $data['student_profile']['Mother_Address_Soi'],
-                "Mother_Address_Tumbon" => $data['student_profile']['Mother_Address_Tumbon'],
-                "Mother_Address_Aumper" => $data['student_profile']['Mother_Address_Aumper'],
-                "Mother_Address_Province" => $data['student_profile']['Mother_Address_Province'],
-                "Mother_Address_Postcode" => $data['student_profile']['Mother_Address_Postcode'],
+                "Mother_Address_Number" => $data['student_profile']['Father_Address_Number'],
+                "Mother_Address_Moo" => $data['student_profile']['Father_Address_Moo'],
+                "Mother_Address_Soi" => $data['student_profile']['Father_Address_Soi'],
+                "Mother_Address_Tumbon" => $data['student_profile']['Father_Address_Tumbon'],
+                "Mother_Address_Aumper" => $data['student_profile']['Father_Address_Aumper'],
+                "Mother_Address_Province" => $data['student_profile']['Father_Address_Province'],
+                "Mother_Address_Postcode" => $data['student_profile']['Father_Address_Postcode'],
 
                 // "Brethren" => "น้อง 1 คน", กรอกเอง
 
@@ -445,7 +465,8 @@ class Job extends CI_Controller {
 
 
 
-            $data_array['image'] = 'http://reg.buu.ac.th/registrar/getstudentimage.asp?id='.$student_id;
+            // $data_array['image'] = 'http://reg.buu.ac.th/registrar/getstudentimage.asp?id='.$student_id;
+            $data_array['image'] = 'http://10.5.1.174/registrar/getstudentimage.asp?id='.$student_id; // .174 == reg.buu
             // print_r($data_array);
             // die();
 
@@ -471,7 +492,7 @@ class Job extends CI_Controller {
 
 
 
-
+            // print_r($result);
             // redirect(base_url($result['full_url']), 'refresh');
             echo "
                 <img src='".base_url('assets/img/loading.gif')."' />
@@ -479,7 +500,7 @@ class Job extends CI_Controller {
                     window.location = '".base_url($result['full_url'])."';
                     setTimeout(function(){
                         window.location = '".site_url()."';
-                    }, 1500);
+                    }, 3000);
                 </script>
             ";
 

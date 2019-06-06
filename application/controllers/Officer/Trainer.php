@@ -71,6 +71,11 @@ class Trainer extends CI_Controller {
         
         $this->template->view('Officer/List_trainer_view',$data);
     }
+
+    public function insert_person()
+    {
+        $this->template->view('Officer/insert_person_view');
+    }
    
     public function delete()
     {
@@ -232,14 +237,14 @@ class Trainer extends CI_Controller {
     {
         $data = array();
         $data['status'] = false;
-        $data['text'] = 'ผิดพลาด';
+        $data['text'] = 'ผิดพลาด มีผู้ใช้ E-mail นี้อยู่แล้ว';
         $data['color'] = 'warning';
         
         $this->load->library('form_validation');
         $this->form_validation->set_rules('person_fullname','ชื่อ-นามสกุล','required');
         $this->form_validation->set_rules('person_position','ตำเเหน่ง','required');
         $this->form_validation->set_rules('person_department','เเผนกงาน','required');
-        $this->form_validation->set_rules('person_telephone','เบอร์โทร','required|numeric');
+        $this->form_validation->set_rules('person_telephone','เบอร์โทร','required');
         $this->form_validation->set_rules('company_id','IDสถานประกอบการ','required|numeric');
         $this->form_validation->set_rules('person_fax_number','FAX');
         // $this->form_validation->set_rules('person_email','E-mail','required|valid_email|is_unique[tb_company_person.person_email]');
@@ -248,10 +253,16 @@ class Trainer extends CI_Controller {
 
         if($this->form_validation->run() != false){
 
-            $company_person = @$this->Trainer->get_trainer_by_email($this->input->post('person_email'))[0];
-            if($company_person[0]['person_active'] != 0) {
-                $data['text'] = 'มีพนักงานนิเทศงานอยู่แล้ว โปรดเลือกจากรายชื่อ';
-            } else {
+            $person_email = $this->input->post('person_email');
+            $tmp = "";
+            $company_person = $this->Trainer->get_trainer_by_email();
+            foreach ($company_person as $person) {
+                if($person['person_email'] == $person_email){
+                    $tmp = $person['person_email'];
+                }
+            }
+
+            if($tmp == ""){
 
                 $password_gen = generateStrongPassword(8);
                 $password_gen_db = password_hash($password_gen, PASSWORD_DEFAULT);
@@ -283,7 +294,7 @@ class Trainer extends CI_Controller {
                 $this->email->subject('แจ้งรายละเอียดข้อมูลเข้าระบบสหกิจ');
                 $this->email->message($msg);
                 $this->email->send();
-                // echo $this->email->print_debugger();
+                //echo $this->email->print_debugger();
 
 
                 // $this->cache->file->save('userpass_'.$data['last_id'], $msg, 86400*365);
@@ -301,9 +312,6 @@ class Trainer extends CI_Controller {
 
         echo json_encode($data);
     }
-
-            
-
 }
 
 

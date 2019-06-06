@@ -40,6 +40,7 @@ class BUUMember_model extends CI_Model
         // return $this->xlogin($username, $password);
 
         $this->ldap->connect();
+        // print_r($this->ldap->authenticate('' , $username, $password));
         if($this->ldap->authenticate('' , $username, $password)) {
             $userdata = $this->ldap->get_data($username,$password);
             if($userdata['ou'] == 'students') {
@@ -57,6 +58,7 @@ class BUUMember_model extends CI_Model
 
                 // get thai name
                 $student = $this->Student->get_student($userdata['code']);
+                // print_r($student);
                 $data['user_fullname'] = $student['student_prefix'].$student['student_fullname'];
                 
             } else if($userdata['ou'] == 'staff') {

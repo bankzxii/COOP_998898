@@ -54,7 +54,8 @@ class Main extends CI_Controller {
         $student_id = $this->Login_session->check_login()->login_value;    
 
 
-        $data['student'] = @$this->Student->get_student($student_id)[0];
+	   $data['student'] = @$this->Student->get_student($student_id)[0];
+	   $data['sum_credit'] = @$this->Student->get_student_sum_credit($student_id);
         $data['department'] = @$this->Student->get_department($data['student']['department_id'])[0];
         $data['term'] = @$this->Term->get_term($data['student']['term_id'])[0];
         $student_info = $this->Student->get_student_data_from_profile($student_id);
@@ -71,7 +72,7 @@ class Main extends CI_Controller {
             'term_semester' => $data['term']['term_semester'],
             'term_year' => $data['term']['term_year'],
             'Student_Level' => get_student_level_from_entry_year($student_info['Entry_Years']),
-            'Student_Credit' => 0, // wait api
+            'Student_Credit' => $data['sum_credit'],
             'date' => thaiDate(date('Y-m-d H:i:s'), true, false),
         ];
 

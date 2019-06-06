@@ -57,6 +57,19 @@
               <div class="row">
                 <div class="col-12 text-center">
                   <button type="submit" class="btn btn-primary px-4">Login</button>
+                  <br>
+                  <br>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 text-center">
+                  <div class="col-md-12">
+                   
+                  <a style="color: #6699FF; font-size:18px;" >สำหรับสถานประกอบการ</a><br>
+               
+              </div>
+                  <a href="<?php echo base_url('/Change_pwd')?>">เปลี่ยนรหัสผ่าน&nbsp;&nbsp;&nbsp;</a>
+                  <a href="<?php echo base_url('/Forgot_pwd')?>">ลืมรหัสผ่าน?</a>
                 </div>
               </div>
               </form>

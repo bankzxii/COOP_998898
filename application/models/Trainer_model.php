@@ -51,10 +51,9 @@ class Trainer_model extends CI_model {
         return $query->result_array();
     }
 
-    public function get_trainer_by_email($email)
+    public function get_trainer_by_email()
     {
-        $this->db->where('person_email', $email);
-        
+        $this->db->select('person_email');   
         $this->db->from('tb_company_person');
         $query = $this->db->get();
         return $query->result_array();
